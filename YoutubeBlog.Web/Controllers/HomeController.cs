@@ -1,21 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using YoutubeBlog.Service.Services.Abractions;
 using YoutubeBlog.Web.Models;
 
 namespace YoutubeBlog.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IArticleService articleService;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IArticleService articleService)
         {
             _logger = logger;
+            this.articleService = articleService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var articles=await articleService.GetAllArticleAsync();
+            return View(articles);
         }
 
         public IActionResult Privacy()
