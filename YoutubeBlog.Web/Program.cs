@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
 using System.Reflection;
 using YoutubeBlog.Data.Context;
 using YoutubeBlog.Data.Extensions;
@@ -24,9 +25,14 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapAreaControllerRoute(
+        name:"Admin",
+        areaName:"Admin",
+        pattern:"Admin/{controller0Home}/{action=Index}/{id?}"
+        );
+    endpoints.MapDefaultControllerRoute();
+}
+);
 app.Run();
