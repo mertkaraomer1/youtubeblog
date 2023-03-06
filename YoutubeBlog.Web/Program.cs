@@ -9,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.loadDataLayerExtensions(builder.Configuration);
 builder.Services.loadServiceLayerExtensions();
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -30,7 +31,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapAreaControllerRoute(
         name:"Admin",
         areaName:"Admin",
-        pattern:"Admin/{controller0Home}/{action=Index}/{id?}"
+        pattern:"Admin/{controller=Home}/{action=Index}/{id?}"
         );
     endpoints.MapDefaultControllerRoute();
 }

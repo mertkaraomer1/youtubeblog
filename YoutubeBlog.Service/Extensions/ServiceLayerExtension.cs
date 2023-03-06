@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 using YoutubeBlog.Data.Context;
 using YoutubeBlog.Data.Repositories.Abstractions;
 using YoutubeBlog.Data.Repositories.Concrates;
@@ -12,8 +14,10 @@ namespace YoutubeBlog.Web.Extensions
     {
         public static IServiceCollection loadServiceLayerExtensions(this IServiceCollection services)
         {
-
+            var assembly=Assembly.GetExecutingAssembly();
             services.AddScoped<IArticleService, ArticleService>();
+            services.AddAutoMapper(assembly);
+
             return services;
         }
     }
