@@ -6,9 +6,12 @@ using YoutubeBlog.Data.Extensions;
 using YoutubeBlog.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.loadDataLayerExtensions(builder.Configuration);
+
 builder.Services.loadServiceLayerExtensions();
 // Add services to the container.
+
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 var app = builder.Build();

@@ -10,6 +10,8 @@ namespace YoutubeBlog.Web.Controllers
         private readonly IArticleService articleService;
         private readonly ILogger<HomeController> _logger;
 
+
+
         public HomeController(ILogger<HomeController> logger,IArticleService articleService)
         {
             _logger = logger;
